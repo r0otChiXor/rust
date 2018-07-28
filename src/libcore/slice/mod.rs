@@ -2341,10 +2341,10 @@ impl<'a, T> IntoIterator for &'a mut [T] {
 macro_rules! is_empty {
     // The way we encode the length of a ZST iterator, this works both for ZST
     // and non-ZST.
-    ($self: expr) => {$self.ptr == $self.end}
+    ($self: ident) => {$self.ptr == $self.end}
 }
 macro_rules! len {
-    ($T: ty, $self: expr) => {{
+    ($T: ty, $self: ident) => {{
         if mem::size_of::<$T>() == 0 {
             ($self.end as usize).wrapping_sub($self.ptr as usize)
         } else {
